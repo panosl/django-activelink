@@ -55,7 +55,11 @@ class ActiveLinkEqualNode(ActiveLinkNodeBase):
 class ActiveLinkStartsWithNode(ActiveLinkNodeBase):
 
     def is_active(self, request, path_to_check):
-        return request.path.startswith(path_to_check)
+        try:
+            from localeurl.utils import locale_url
+            return request.path.startswith(locale_url(path_to_check))
+        except ImportError:
+            return request.path.startswith(path_to_check)
 
 
 def parse(parser, token, end_tag):
