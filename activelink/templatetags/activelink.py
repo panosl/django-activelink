@@ -15,6 +15,11 @@ else:
 
 from django.template.defaulttags import TemplateIfParser
 
+if DJANGO_VERSION < (1, 5):
+    from django.templatetags.future import url
+else:
+    from django.template.defaulttags import url  # NOQA
+
 
 register = Library()
 
