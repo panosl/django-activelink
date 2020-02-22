@@ -1,4 +1,4 @@
- from django import VERSION as DJANGO_VERSION
+from django import VERSION as DJANGO_VERSION
 
 from django.template import Library, Node, NodeList, VariableDoesNotExist
 
