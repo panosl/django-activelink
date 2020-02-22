@@ -1,17 +1,16 @@
-import django
+ from django import VERSION as DJANGO_VERSION
 
 from django.template import Library, Node, NodeList, VariableDoesNotExist
-from django.core.urlresolvers import NoReverseMatch
 
-if django.VERSION[:2] < (1, 5):
-    # If the user is using Django < 1.5, then load up the url tag
-    # from future. Otherwise use the normal one. The purpose of this
-    # is to get the url template tag that supports context variables
-    # for the first argument, yet won't raise a deprecation warning
-    # about importing it from future.
+if DJANGO_VERSION < (1, 5):
     from django.templatetags.future import url
 else:
     from django.template.defaulttags import url  # NOQA
+
+if DJANGO_VERSION[0] <= 1:
+    from django.core.urlresolvers import NoReverseMatch
+else:
+    from django.urls import NoReverseMatch
 
 from django.template.defaulttags import TemplateIfParser
 
